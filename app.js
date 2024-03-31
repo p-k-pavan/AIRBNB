@@ -3,15 +3,6 @@ const mongoose = require("mongoose")
 const Listing = require("./models/listing.js")
 const app = express();
 
-main().then(()=>{
-    console.log("connected db")
-})
-.catch(err => console.log(err));
-
-async function main() {
-  await mongoose.connect('mongodb://127.0.0.1:27017/wounderLust');
-
-}
 
 app.get("/testListing",async (req,res)=>{
     let newListing = new Listing({
