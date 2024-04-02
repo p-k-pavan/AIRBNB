@@ -6,34 +6,35 @@
         <title>WounderLust</title>
     </head>
     <body>
-        <form method="POST" action="/listings">
+        <form method="POST"" action="/listings/<%=data._id%>?_method=PUT">
             <h3>Create New LIsting</h3>
             <br>
-            <input type="text" name="listing[title]"
-                placeholder="enter a title">
+            <input type="text" name="listing[title]" placeholder="enter a title"
+                value="<%=data.title%>">
             <br>
             <br>
             <textarea name="listing[description]"
-                placeholder="write a description"></textarea>
+                placeholder="write a description"><%=data.description%>        </textarea>
             <br>
             <br>
-            <input type="text" name="listing[image]" placeholder="image url">
+            <input type="text" name="listing[image]" placeholder="image url"
+                value="<%=data.image%>">
             <br>
             <br>
             <input type="number" name="listing[price]"
-                placeholder="enter a price">
+                placeholder="enter a price" value="<%=data.price%>">
             <br>
             <br>
             <input type="text" name="listing[country]"
-                placeholder="enter a country">
+                placeholder="enter a country" value="<%=data.country%>">
             <br>
             <br>
             <input type="text" name="listing[location]"
-                placeholder="enter a location">
+                placeholder="enter a location" value="<%=data.location%>">
 
             <br>
             <br>
-            <button>ADD</button>
+            <button>submit</button>
         </form>
     </body>
 </html>

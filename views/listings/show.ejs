@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Listing Detials</h1>
-    <ul>
-       
-  
-    <img src="<%=data.image%>" style="width: 400px;"/>
-    <li> <%= data.title %></li>
-    <li><%= data.description  %></li>
-    <li>&#8377;<%= data.price.toLocaleString("en-IN") %></li>
-    <li><%= data.country %></li>
-    <li><%= data.location %></li>
-</ul>
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+        <h1>Listing Detials</h1>
+        <ul>
+
+            <img src="<%=data.image%>" style="width: 400px;" />
+            <li> <%= data.title %></li>
+            <li><%= data.description %></li>
+            <li>&#8377;<%= data.price.toLocaleString("en-IN") %></li>
+            <li><%= data.country %></li>
+            <li><%= data.location %></li>
+        </ul>
+        <a href="/listings/<%=data._id%>/edit">Edit</a>
+    </body>
 </html>
