@@ -64,6 +64,15 @@ app.put("/listings/:id", async (req, res) => {
 });
 const PORT = 3000;
 
+// delete routr
+
+app.delete("/listings/:id", async (req, res) => {
+  let id = req.params.id;
+  let dl = await Listing.findByIdAndDelete(id);
+  console.log(dl);
+  res.redirect("/listings");
+});
+
 app.listen(PORT, () => {
   console.log("Server was listen in port ", PORT);
 });
