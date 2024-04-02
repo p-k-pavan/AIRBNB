@@ -37,6 +37,13 @@ app.get("/listings",async(req,res)=>{
     res.render("listings/index.ejs",{allListing})
 })
 
+// new listings
+
+app.get("/listings/new",(req,res)=>{
+    res.render("listings/new.ejs")
+})
+
+
 //show route
 
 app.get("/listings/:id", async (req, res) => {
@@ -48,6 +55,12 @@ app.get("/listings/:id", async (req, res) => {
     
 });
 
+//create route 
+ app.post("/listings",async(req,res)=>{
+    let newListing = new Listing(req.body.listing);
+    await newListing.save();
+    res.redirect("/listings")
+ })
 
 const PORT = 3000;
 

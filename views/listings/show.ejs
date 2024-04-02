@@ -8,10 +8,11 @@
 <body>
     <h1>Listing Detials</h1>
     <ul>
-       <li> <%= data.title %></li>
+       
   
-    <img src="<%=data.image%>"/>
-    <li><%= data.discription %></li>
+    <img src="<%=data.image%>" style="width: 400px;"/>
+    <li> <%= data.title %></li>
+    <li><%= data.description  %></li>
     <li>&#8377;<%= data.price.toLocaleString("en-IN") %></li>
     <li><%= data.country %></li>
     <li><%= data.location %></li>

@@ -9,6 +9,10 @@
     
     <h1>All Listing</h1>
 
+    <form method="GET" action="/listings/new">
+        <button>Create New Listing</button>
+    </form>
+
     <ul>
     <% for(list of allListing){%>
        <li><a href="/listings/<%=list._id%>"><%= list.title %></a></li>
