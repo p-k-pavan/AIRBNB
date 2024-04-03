@@ -12,3 +12,24 @@
     opacity: 0.6;
 }
 
+.footer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 4px;
+    height: 8rem;
+    background-color: #ebebeb;
+    justify-content: center;
+}
+.f-info-social{
+    display: flex;
+    gap: 18px;
+    font-size: x-large;
+}
+
+.f-info-link{
+    display: flex;
+    gap: 12px
+    ;
+}
