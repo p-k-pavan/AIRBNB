@@ -1,40 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>WounderLust</title>
-    </head>
+<% layout("layouts/boilerplate.ejs") -%>
     <body>
-        <form method="POST"" action="/listings/<%=data._id%>?_method=PUT">
+        <form method="POST"" action="/listings/<%=listing._id%>?_method=PUT">
             <h3>Create New LIsting</h3>
             <br>
             <input type="text" name="listing[title]" placeholder="enter a title"
-                value="<%=data.title%>">
+                value="<%=listing.title%>">
             <br>
             <br>
             <textarea name="listing[description]"
-                placeholder="write a description"><%=data.description%>        </textarea>
+                placeholder="write a description"><%=listing.description%>        </textarea>
             <br>
             <br>
             <input type="text" name="listing[image]" placeholder="image url"
-                value="<%=data.image%>">
+                value="<%=listing.image%>">
             <br>
             <br>
             <input type="number" name="listing[price]"
-                placeholder="enter a price" value="<%=data.price%>">
+                placeholder="enter a price" value="<%=listing.price%>">
             <br>
             <br>
             <input type="text" name="listing[country]"
-                placeholder="enter a country" value="<%=data.country%>">
+                placeholder="enter a country" value="<%=listing.country%>">
             <br>
             <br>
             <input type="text" name="listing[location]"
-                placeholder="enter a location" value="<%=data.location%>">
+                placeholder="enter a location" value="<%=listing.location%>">
 
             <br>
             <br>
             <button>submit</button>
         </form>
     </body>
-</html>

@@ -1,0 +1,14 @@
+.navbar{
+    height: 5rem;
+    background: #fff;
+}
+.header-link{
+    color: black;
+    font-weight: bold;
+   
+}
+.header-link:hover{
+    color: black;
+    opacity: 0.6;
+}
+
