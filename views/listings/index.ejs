@@ -14,7 +14,8 @@
                 <div class="card">
                     <img src="<%= list.image %>" class="card-img-top" alt="..." style="width: 22rem; height: 20rem;">
                     <div class="card-body">
-                        <p class="card-text"><b><%= list.title %></b><br>&#8377; <%= list.price.toLocaleString("en-IN") %> / night</p>
+                        <p class="card-text"><b><%= list.title %></b><br>&#8377; <%= list.price?.toLocaleString("en-IN") %> / night</p>
+
                     </div>
                 </div>
             </a>
