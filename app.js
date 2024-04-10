@@ -70,7 +70,7 @@ app.get("/listings/new", (req, res) => {
 app.get(
   "/listings/:id",
   WrapAsync(async (req, res) => {
-    const listing = await Listing.findById(req.params.id);
+    const listing = await Listing.findById(req.params.id).populate("reviews");
     if (!listing) {
       return res.status(404).send("Listing not found");
     }
