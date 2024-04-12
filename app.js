@@ -1,13 +1,14 @@
+// app.js
+
 const express = require("express");
 const mongoose = require("mongoose");
-const Listing = require("./models/listing.js");
 const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
-const WrapAsync = require("./Utils/WrapAsync.js");
 const ExpressError = require("./Utils/ExpressError.js");
-const { listingSchema,reviewSchema } = require("./schema.js");
-const Review = require("./models/review.js");
+
+const listings = require("./routes/listing.js");
+const reviews = require("./routes/reviews.js")
 
 const app = express();
 
@@ -32,115 +33,9 @@ app.use(methodOverride("_method"));
 app.engine("ejs", ejsMate);
 app.use(express.static(path.join(__dirname, "public")));
 
-const validateListing = (req, res, next) => {
-  let { error } = listingSchema.validate(req.body);
-  if (error) {
-    throw new ExpressError(400, error);
-  } else {
-    next();
-  }
-};
-
-
-const validateReview = (req, res, next) => {
-  let { error } = reviewSchema.validate(req.body);
-  if (error) {
-    throw new ExpressError(400, error);
-  } else {
-    next();
-  }
-};
 // Routes
-
-// Index route - Display all listings
-app.get(
-  "/listings",
-  WrapAsync(async (req, res) => {
-    const allListing = await Listing.find({});
-    res.render("listings/index", { allListing });
-  })
-);
-
-// New listing form
-app.get("/listings/new", (req, res) => {
-  res.render("listings/new");
-});
-
-// Show route - Display details of a specific listing
-app.get(
-  "/listings/:id",
-  WrapAsync(async (req, res) => {
-    const listing = await Listing.findById(req.params.id).populate("reviews");
-    if (!listing) {
-      return res.status(404).send("Listing not found");
-    }
-    res.render("listings/show", { listing });
-  })
-);
-
-// Create route - Add a new listing
-// Create route - Add a new listing
-app.post(
-  "/listings",
-  validateListing,
-  WrapAsync(async (req, res, next) => {
-    const newListing = new Listing(req.body.listing);
-    await newListing.save();
-    res.redirect("/listings");
-  })
-);
-
-// Edit route - Display form to edit a listing
-app.get(
-  "/listings/:id/edit",
-  WrapAsync(async (req, res) => {
-    const listing = await Listing.findById(req.params.id);
-    if (!listing) {
-      return res.status(404).send("Listing not found");
-    }
-    res.render("listings/edit", { listing });
-  })
-);
-
-// Update route - Update a listing
-app.put(
-  "/listings/:id",
-  validateListing,
-  WrapAsync(async (req, res, next) => {
-    const { id } = req.params;
-    await Listing.findByIdAndUpdate(id, req.body.listing);
-    res.redirect(`/listings/${id}`);
-  })
-);
-
-// Delete route - Delete a listing
-app.delete(
-  "/listings/:id",
-  WrapAsync(async (req, res) => {
-    const { id } = req.params;
-    await Listing.findByIdAndDelete(id);
-    res.redirect("/listings");
-  })
-);
-
-//Reviews post route
-app.post("/listings/:id/reviews", validateReview,WrapAsync(async (req, res, next) => {
-  try {
-     let listing = await Listing.findById(req.params.id)
-     if (!listing) {
-         throw new ExpressError(404, "Listing not found");
-     }
-
-     let newReview = new Review(req.body.review);
-     listing.reviews.push(newReview);
-     await newReview.save();
-     await listing.save();
-     res.redirect(`/listings/${listing._id}`);
-  } catch (error) {
-     next(error); // Pass the error to the error handling middleware
-  }
-}));
-
+app.use("/listings", listings);
+app.use("/listings/:id", reviews); // Mount the reviews router without including '/reviews'
 
 app.all("*", (req, res, next) => {
   next(new ExpressError(404, "Page not found"));
