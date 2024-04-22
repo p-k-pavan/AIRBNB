@@ -31,6 +31,7 @@ router.post(
       listing.reviews.push(newReview);
       await newReview.save();
       await listing.save();
+      req.flash("success", "New Review Created!")
       res.redirect(`/listings/${listing._id}`);
     } catch (error) {
       next(error); // Pass the error to the error handling middleware
