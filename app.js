@@ -8,6 +8,9 @@ const ejsMate = require("ejs-mate");
 const ExpressError = require("./Utils/ExpressError.js");
 const session = require("express-session")
 const flash = require("connect-flash")
+const passport = require("passport");
+const Localstrategy = require("passport-local");
+const User = require("./models/user.js")
 
 const listings = require("./routes/listing.js");
 const reviews = require("./routes/reviews.js")
@@ -49,6 +52,14 @@ const sessionOption = {
 
 app.use(session(sessionOption))
 app.use(flash())
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.use(new Localstrategy(User.authenticate()));
+
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 app.use((req,res,next)=>{
   res.locals.success=req.flash("success")
