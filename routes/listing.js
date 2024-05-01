@@ -26,8 +26,7 @@ router.get(
 
 // New listing form
 router.get("/new", isLoggedIn, (req, res) => {
-  console.log(req.user);
-
+ 
   res.render("listings/new");
 });
 
