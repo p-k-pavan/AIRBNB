@@ -45,9 +45,11 @@ router.post(
     failureFlash: true,
   }),
   async (req, res) => {
-    res.redirect(res.locals.redirectUrl); // Corrected from req.locals to res.locals
+    redirectUrl = res.locals.redirectUrl || "/listings"
+    res.redirect(redirectUrl); // Corrected from req.locals to res.locals
     req.flash("success", "user Login successfully!");
   }
+  
 );
 
 
