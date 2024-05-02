@@ -1,3 +1,5 @@
+const Listing = require("./models/listing.js")
+
 module.exports.isLoggedIn = (req,res,next)=>{
   console.log(req.user);
 
@@ -17,4 +19,14 @@ module.exports.saveRedirectUrl = (req,res,next)=>{
        
       }
       next();
+}
+
+module.exports.isOwner = async(req,res,next)=>{
+  const { id } = req.params;
+  let listing_id = await Listing.findById(id);
+  if(!listing_id.owner._id.equals(res.locals.currUser._id)){
+    req.flash("error","You don't have access to make changes")
+    return res.redirect(`/listings/${id}`);
+  }
+  next();
 }
